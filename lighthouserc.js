@@ -3,8 +3,8 @@ module.exports = {
     // ...
     collect: {
     	settings: {
-              onlyCategories: ['accessibility', 'best-practices', 'performance'],
-              emulatedFormFactor: 'desktop',
+              "onlyCategories": ['accessibility', 'best-practices', 'performance'],
+              "preset": "desktop"
 	},
     },
     upload: {
