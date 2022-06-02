@@ -30,7 +30,7 @@ jobs:
       run: npm run prettier:check
       
     - name: Test
-      run: npm run test -- --testResultsProcessor=\"jest-junit\"
+      run: npm run test -- --coverage --ci
       
     - name: Test Report
       uses: phoenix-actions/test-reporting@v8
