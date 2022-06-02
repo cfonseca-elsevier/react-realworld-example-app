@@ -35,7 +35,7 @@
     "eject": "react-scripts eject",
     "prettier:check": "prettier --check src",
     "prettier": "prettier --write src",
-    "lint": "eslint src"
+    "lint": "eslint src",
     "test:ci": "npm run test -- --testResultsProcessor=\"jest-junit\""
   },
   "pre-commit": [
