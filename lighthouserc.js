@@ -1,6 +1,12 @@
 module.exports = {
   ci: {
     // ...
+    collect: {
+    				settings: {
+              onlyCategories: ['accessibility', 'best-practices', 'performance'],
+              emulatedFormFactor: 'desktop',
+						},
+    },
     upload: {
       target: 'temporary-public-storage',
     },
