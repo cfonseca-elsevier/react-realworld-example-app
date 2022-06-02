@@ -74,7 +74,13 @@ jobs:
       
     - name: Build
       run: npm run build
-
+    
+    - name: Save Build 
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: ./build/
+      
   lighthouseci:
     runs-on: ubuntu-latest
     steps:
@@ -85,7 +91,12 @@ jobs:
       - name: npm install, build
         run: |
           npm install
-          npm run build
+
+      - name: Retrive Artifacts
+      - uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: ./build
       - name: run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.8.x
