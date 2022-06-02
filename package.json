@@ -66,13 +66,10 @@
   },
   "jest": {
     "clearMocks": true,
+    "testResultsProcessor": "./node_modules/jest-junit-reporter"
     "collectCoverageFrom": [
       "!<rootDir>/src/index.tsx",
       "!<rootDir>/src/helpers/testsHelpers.ts"
-    ],
-    "reporters": [
-      "default",
-      ["jest-junit", {"outputDirectory": "reports", "outputName": "report.xml"}]
     ],
     "coverageThreshold": {
       "global": {
