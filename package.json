@@ -36,6 +36,7 @@
     "prettier:check": "prettier --check src",
     "prettier": "prettier --write src",
     "lint": "eslint src"
+    "test:ci": "npm run test -- --testResultsProcessor=\"jest-junit\""
   },
   "pre-commit": [
     "prettier:check",
@@ -66,7 +67,6 @@
   },
   "jest": {
     "clearMocks": true,
-    "testResultsProcessor": "./node_modules/jest-junit-reporter",
     "collectCoverageFrom": [
       "!<rootDir>/src/index.tsx",
       "!<rootDir>/src/helpers/testsHelpers.ts"
