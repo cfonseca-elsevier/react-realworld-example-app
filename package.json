@@ -66,7 +66,7 @@
   },
   "jest": {
     "clearMocks": true,
-    "testResultsProcessor": "./node_modules/jest-junit-reporter"
+    "testResultsProcessor": "./node_modules/jest-junit-reporter",
     "collectCoverageFrom": [
       "!<rootDir>/src/index.tsx",
       "!<rootDir>/src/helpers/testsHelpers.ts"
