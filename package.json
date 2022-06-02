@@ -70,6 +70,10 @@
       "!<rootDir>/src/index.tsx",
       "!<rootDir>/src/helpers/testsHelpers.ts"
     ],
+    "reporters": [
+      "default",
+      ["jest-junit", {"outputDirectory": "reports", "outputName": "report.xml"}]
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,
