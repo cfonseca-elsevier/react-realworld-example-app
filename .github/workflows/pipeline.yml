@@ -42,6 +42,7 @@ jobs:
         path: ./build/
       
   web-audit:
+    name: Web Audit
     needs: [build]
     runs-on: ubuntu-latest
     steps:
