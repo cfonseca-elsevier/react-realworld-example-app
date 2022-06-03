@@ -60,7 +60,7 @@ jobs:
         with:
           node-version: 16
       - name: Download Build
-      - uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v3
         with:
           name: build
           path: ./build
