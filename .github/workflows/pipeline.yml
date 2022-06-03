@@ -24,7 +24,7 @@ jobs:
       run: echo "${{ github.event.pull_request.number }}"
     - name: Debug 2
       run: echo " ${{ github.event.number }}"
-      
+
     - name: Initialize
       run: npm ci
       
@@ -77,11 +77,13 @@ jobs:
           lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+      - uses: jwalton/gh-find-current-pr@v1
+          id: findPr
       - name: Add Lighthouse stats as comment
         id: comment_to_pr
         uses: marocchino/sticky-pull-request-comment@v2.0.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ github.event.pull_request.number }}
+          number: ${{ steps.findPr.outputs.pr }}
           header: Lighthouse
           message: "lighthouse Passed"
