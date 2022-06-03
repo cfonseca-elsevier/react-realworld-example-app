@@ -59,8 +59,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      - name: npm install, build
-        run: npm install
+      - name: Download Build
       - uses: actions/download-artifact@v3
         with:
           name: build
@@ -73,26 +72,11 @@ jobs:
           lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-      - name: Format lighthouse score
-        id: format_lighthouse_score
-        uses: actions/github-script@v5
-        with:
-          script: |
-                const lighthouseCommentMaker = require('./lighthouseCommentMaker.js');
-
-                const lighthouseOutputs = {
-                  manifest: ${{ steps.lighthouse_audit.outputs.manifest }},
-                  links: ${{ steps.lighthouse_audit.outputs.links }}
-                };
-
-                const comment = lighthouseCommentMaker({ lighthouseOutputs });
-                core.setOutput("comment", comment);
-
       - name: Add Lighthouse stats as comment
         id: comment_to_pr
         uses: marocchino/sticky-pull-request-comment@v2.0.0
         with:
           GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           number: ${{ github.event.pull_request.number }}
-          header: lighthouse
-          message: ${{ steps.format_lighthouse_score.outputs.comment }}
+          header: Lighthouse
+          message: "lighthouse Passed"
