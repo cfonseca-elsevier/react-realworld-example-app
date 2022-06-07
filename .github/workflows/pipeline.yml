@@ -76,6 +76,7 @@ jobs:
         with:
           # no urls needed, since it uses local folder to scan .html files
           configPath: './lighthouserc.js'
+          uploadArtifacts: true
           
       - uses: jwalton/gh-find-current-pr@v1
         id: findPr
