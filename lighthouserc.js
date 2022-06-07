@@ -2,6 +2,7 @@ module.exports = {
   ci: {
     // ...
     collect: {
+	staticDistDir: "./build",   
     	settings: {
               "onlyCategories": ['accessibility', 'best-practices', 'performance'],
               "preset": "desktop"
