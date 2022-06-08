@@ -72,11 +72,11 @@ jobs:
           
       - name: run Lighthouse CI
         id: lighthouse_audit
-        uses: treosh/lighthouse-ci-action@v9
-        with:
-          # no urls needed, since it uses local folder to scan .html files
-          configPath: './lighthouserc.js'
-          uploadArtifacts: true
+        run: |
+          npm install -g @lhci/cli@0.8.x
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
           
       - uses: jwalton/gh-find-current-pr@v1
         id: findPr
