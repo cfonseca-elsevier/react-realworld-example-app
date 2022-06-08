@@ -108,6 +108,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16     
-     
+      - name: Initialize
+        run: npm ci     
+    
       - name: Run Service
         run:  npm start 
