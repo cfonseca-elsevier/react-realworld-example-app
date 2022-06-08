@@ -87,4 +87,27 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           number: ${{ steps.findPr.outputs.pr }}
           header: Lighthouse
-          message: "lighthouse Passed"
+          message: "lighthouse still Passed"
+          
+          
+  Zap-Baseline:
+    name: Zap Baseline
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Download Build
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: ./build
+     
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16     
+     
+      - name: Run Service
+        run:  npm start 
