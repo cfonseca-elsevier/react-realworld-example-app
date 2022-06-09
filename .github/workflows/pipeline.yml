@@ -20,24 +20,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Debug 1
-      run: echo "${{ github.event.pull_request.number }}"
-    - name: Debug 2
-      run: echo " ${{ github.event.number }}"
-    - name: Get npm cache directory
-      id: npm-cache-dir
-      run: |
-        echo "::set-output name=dir::$(npm config get cache)"
-    - uses: actions/cache@v3
-      id: npm-cache
-      with:
-        path: ${{ steps.npm-cache-dir.outputs.dir }}
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    
     - name: Initialize
-      run: npm install
+      run: npm ci
       
     - name: Lint
       run: npm run lint
@@ -121,7 +105,6 @@ jobs:
           node-version: 16     
 
       - name: Initialize
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci     
     
       - name: Run Service
