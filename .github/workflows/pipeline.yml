@@ -130,5 +130,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          destination_dir: reports
+          destination_dir: reports/${{ github.head_ref }}
           publish_dir: zap_report
