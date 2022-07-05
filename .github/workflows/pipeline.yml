@@ -137,3 +137,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           destination_dir: reports/${{ steps.extract_branch.outputs.branch }}
           publish_dir: zap_report
+          
+      - name: Post the link to the report
+        if: always()
+        uses: Sibz/github-status-action@v1
+        with: 
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          context: 'Zap report'
+          state: 'success'
+          sha: ${{ github.event.pull_request.head.sha }}
+          target_url: cfonseca-elsevier.github.io/react-realworld-example-app/reports/${{ steps.extract_branch.outputs.branch }}/report_html.html
