@@ -124,10 +124,13 @@ jobs:
         uses: zaproxy/action-full-scan@v0.4.0
         with:
          target: ${{ steps.start_ip.outputs.ip  }}
-         
+      
+      - name: list Files
+        run: ls    
+      
       - name: publish Report
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          destination_dir: reports/${{ github.ref }}
+          destination_dir: reports
           publish_dir: zap_report
