@@ -117,16 +117,14 @@ jobs:
       - name: Make zap Folder
         run: mkdir zap_report
       
-      - name: Move to zap Folder
-        run: cd zap_report
         
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.4.0
         with:
          target: ${{ steps.start_ip.outputs.ip  }}
       
-      - name: list Files
-        run: ls    
+      - name: move Files
+        run: mv report*.*  ./zap_report/.  
       
       - name: publish Report
         uses: peaceiris/actions-gh-pages@v3
