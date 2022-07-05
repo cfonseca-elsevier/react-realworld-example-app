@@ -44,12 +44,12 @@
 
 Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.
 
-* URL: http://10.1.0.13:3000/robots.txt
+* URL: http://10.1.0.167:3000/robots.txt
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `default-src 'none'`
-* URL: http://10.1.0.13:3000/sitemap.xml
+* URL: http://10.1.0.167:3000/sitemap.xml
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -89,12 +89,12 @@ Ensure that your web server, application server, load balancer, etc. is properly
 
 Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.
 
-* URL: http://10.1.0.13:3000
+* URL: http://10.1.0.167:3000
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: ``
-* URL: http://10.1.0.13:3000/
+* URL: http://10.1.0.167:3000/
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -135,7 +135,7 @@ Ensure that your web server, application server, load balancer, etc. is configur
 
 The site is only served under HTTP and not HTTPS.
 
-* URL: http://10.1.0.13:3000
+* URL: http://10.1.0.167:3000
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -171,12 +171,12 @@ Configure your web or application server to use SSL (https).
 
 The response does not include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options to protect against 'ClickJacking' attacks.
 
-* URL: http://10.1.0.13:3000
+* URL: http://10.1.0.167:3000
   * Method: `GET`
   * Parameter: `X-Frame-Options`
   * Attack: ``
   * Evidence: ``
-* URL: http://10.1.0.13:3000/
+* URL: http://10.1.0.167:3000/
   * Method: `GET`
   * Parameter: `X-Frame-Options`
   * Attack: ``
@@ -212,37 +212,37 @@ If you expect the page to be framed only by pages on your server (e.g. it's part
 
 The web/application server is leaking information via one or more "X-Powered-By" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.
 
-* URL: http://10.1.0.13:3000
+* URL: http://10.1.0.167:3000
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `X-Powered-By: Express`
-* URL: http://10.1.0.13:3000/
+* URL: http://10.1.0.167:3000/
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `X-Powered-By: Express`
-* URL: http://10.1.0.13:3000/robots.txt
+* URL: http://10.1.0.167:3000/robots.txt
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `X-Powered-By: Express`
-* URL: http://10.1.0.13:3000/sitemap.xml
+* URL: http://10.1.0.167:3000/sitemap.xml
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `X-Powered-By: Express`
-* URL: http://10.1.0.13:3000/static/js/bundle.js
+* URL: http://10.1.0.167:3000/static/js/bundle.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `X-Powered-By: Express`
-* URL: http://10.1.0.13:3000/static/js/main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `X-Powered-By: Express`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -278,132 +278,132 @@ Ensure that your web server, application server, load balancer, etc. is configur
 
 A timestamp was disclosed by the application/web server - Unix
 
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `00002017`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `0123456789`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `02014101`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `1073741823`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `1073741824`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `1073741825`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `1330512305`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `1330515905`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `134217727`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `134217728`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `20090320`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `20121025`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `20131105`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `20190918`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `2147483647`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `254874553`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `268435456`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `33554432`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `44198641`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `512969520`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `604800000`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `62914560`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `67108864`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `805306368`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `86400000`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -438,27 +438,27 @@ Manually confirm that the timestamp data is not sensitive, and that the data can
 
 The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.
 
-* URL: http://10.1.0.13:3000
+* URL: http://10.1.0.167:3000
   * Method: `GET`
   * Parameter: `X-Content-Type-Options`
   * Attack: ``
   * Evidence: ``
-* URL: http://10.1.0.13:3000/
+* URL: http://10.1.0.167:3000/
   * Method: `GET`
   * Parameter: `X-Content-Type-Options`
   * Attack: ``
   * Evidence: ``
-* URL: http://10.1.0.13:3000/static/js/bundle.js
+* URL: http://10.1.0.167:3000/static/js/bundle.js
   * Method: `GET`
   * Parameter: `X-Content-Type-Options`
   * Attack: ``
   * Evidence: ``
-* URL: http://10.1.0.13:3000/static/js/main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/main.chunk.js
   * Method: `GET`
   * Parameter: `X-Content-Type-Options`
   * Attack: ``
   * Evidence: ``
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: `X-Content-Type-Options`
   * Attack: ``
@@ -495,102 +495,102 @@ If possible, ensure that the end user uses a standards-compliant and modern web 
 
 The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments.
 
-* URL: http://10.1.0.13:3000/static/js/bundle.js
+* URL: http://10.1.0.167:3000/static/js/bundle.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `bugs`
-* URL: http://10.1.0.13:3000/static/js/bundle.js
+* URL: http://10.1.0.167:3000/static/js/bundle.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `from`
-* URL: http://10.1.0.13:3000/static/js/bundle.js
+* URL: http://10.1.0.167:3000/static/js/bundle.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `later`
-* URL: http://10.1.0.13:3000/static/js/bundle.js
+* URL: http://10.1.0.167:3000/static/js/bundle.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `TODO`
-* URL: http://10.1.0.13:3000/static/js/main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `from`
-* URL: http://10.1.0.13:3000/static/js/main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `user`
-* URL: http://10.1.0.13:3000/static/js/main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `username`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `bug`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `bugs`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `db`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `FIXME`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `from`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `later`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `query`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `select`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `TODO`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `user`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `username`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `where`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
@@ -623,17 +623,17 @@ Remove all comments that return information that may help an attacker and fix an
 
 The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.
 
-* URL: http://10.1.0.13:3000
+* URL: http://10.1.0.167:3000
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `<script src="/static/js/bundle.js"></script>`
-* URL: http://10.1.0.13:3000/
+* URL: http://10.1.0.167:3000/
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
   * Evidence: `<script src="/static/js/bundle.js"></script>`
-* URL: http://10.1.0.13:3000/static/js/vendors~main.chunk.js
+* URL: http://10.1.0.167:3000/static/js/vendors~main.chunk.js
   * Method: `GET`
   * Parameter: ``
   * Attack: ``
