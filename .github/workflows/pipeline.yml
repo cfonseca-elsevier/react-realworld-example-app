@@ -125,10 +125,15 @@ jobs:
       
       - name: move Files
         run: mv report*.*  ./zap_report/.  
-      
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        
+        id: extract_branch
       - name: publish Report
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          destination_dir: reports/${{ github.head_ref }}
+          destination_dir: reports/${{ steps.extract_branch.outputs.branch }}
           publish_dir: zap_report
