@@ -114,7 +114,20 @@ jobs:
         id: start_ip
         run: echo "::set-output name=ip::$(grep -m 1 'On Your Network:' <(tail -f output.log) |  sed 's/.*http/http/')"
       
+      - name: Make zap Folder
+        run: mkdir zap_report
+      
+      - name: Move to zap Folder
+        run: cd zap_report
+        
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.4.0
         with:
          target: ${{ steps.start_ip.outputs.ip  }}
+         
+      - name: publish Report
+        uses: peaceiris/actions-gh-pages@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          destination_dir: reports/${{ github.ref }}
+          publish_dir: zap_report
