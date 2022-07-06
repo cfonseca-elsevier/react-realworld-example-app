@@ -146,4 +146,4 @@ jobs:
           context: 'Zap report'
           state: 'success'
           sha:  ${{github.event.pull_request.head.sha || github.sha}}
-          target_url: cfonseca-elsevier.github.io/react-realworld-example-app/reports/${{ steps.extract_branch.outputs.branch }}/report_html.html
+          target_url: https://cfonseca-elsevier.github.io/react-realworld-example-app/reports/${{ steps.extract_branch.outputs.branch }}/report_html.html
