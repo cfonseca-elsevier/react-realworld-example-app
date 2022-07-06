@@ -2,13 +2,15 @@ name: Pipeline
 on: push
 
 jobs:
-  code-style:
-    name: Code Style
+  build:
+    name: Validate,  Test & Build 
     runs-on: ubuntu-latest
+    env:
+      CI: true
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x]
     
     steps:
     - uses: actions/checkout@v2
@@ -27,81 +29,121 @@ jobs:
     - name: Prettier
       run: npm run prettier:check
       
-  test:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    env:
-      CI: true
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-    
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Initialize
-      run: npm ci
-      
     - name: Test
-      run: npm run test -- --coverage
+      run: npm run jest -- --coverage --ci
       
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    env:
-      CI: true
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-    
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - name: Test Report
+      uses: phoenix-actions/test-reporting@v8
+      id: test-report               # Set ID reference for step
+      if: success() || failure()    # run this step even if previous step failed
       with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Initialize
-      run: npm ci
+        name: JEST Tests            # Name of the check run which will be created
+        path: ./junit.xml    # Path to test results
+        reporter: jest-junit        # Format of test results
       
     - name: Build
       run: npm run build
-
-  deploy:
-    name: Deploy to Netlify
-    runs-on: ubuntu-latest
-    needs: [code-style, test, build]
-    if: github.ref == 'refs/heads/master'
-    env:
-      CI: true
     
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js 16.x
-      uses: actions/setup-node@v1
+    - name: Save Build 
+      uses: actions/upload-artifact@v3
       with:
-        node-version: 16.x
-
-    - name: Initialize
-      run: npm ci
+        name: build
+        path: ./build/
       
-    - name: Build
-      run: npm run build
+  web-audit:
+    name: Web Audit
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Download Build
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: ./build
+          
+      - name: run Lighthouse CI
+        id: lighthouse_audit
+        run: |
+          npm install -g @lhci/cli@0.8.x
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          
+      - uses: jwalton/gh-find-current-pr@v1
+        id: findPr
+      - name: Add Lighthouse stats as comment
+        id: comment_to_pr
+        uses: marocchino/sticky-pull-request-comment@v2.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.findPr.outputs.pr }}
+          header: Lighthouse
+          message: "lighthouse still Passed"
+          
+          
+  Zap-Baseline:
+    name: Zap Baseline
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Download Build
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: ./build
+     
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16     
 
-    - name: Deploy to netlify
-      uses: netlify/actions/cli@master
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      with:
-        args: deploy --dir=build --prod
-        secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+      - name: Initialize
+        run: npm ci     
+    
+      - name: Run Service
+        run:  npm start &> output.log &
+     
+      - name: Wait for Start
+        id: start_ip
+        run: echo "::set-output name=ip::$(grep -m 1 'On Your Network:' <(tail -f output.log) |  sed 's/.*http/http/')"
+      
+      - name: Make zap Folder
+        run: mkdir zap_report
+      
+        
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+         target: ${{ steps.start_ip.outputs.ip  }}
+      
+      - name: move Files
+        run: mv report*.*  ./zap_report/.  
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        
+        id: extract_branch
+      - name: publish Report
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          destination_dir: reports/${{ steps.extract_branch.outputs.branch }}
+          publish_dir: zap_report
+          
+      - name: Post the link to the report
+        if: always()
+        uses: Sibz/github-status-action@v1
+        with: 
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          context: 'Zap report'
+          state: 'success'
+          sha:  ${{github.event.pull_request.head.sha || github.sha}}
+          target_url: https://cfonseca-elsevier.github.io/react-realworld-example-app/reports/${{ steps.extract_branch.outputs.branch }}/report_html.html
